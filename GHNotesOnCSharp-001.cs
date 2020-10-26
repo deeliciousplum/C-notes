@@ -32,20 +32,20 @@ namespace GHNotesOnCSharp_001
 
             // output one of the array elements
             //
-            Console.WriteLine("Outputting one element of the array that was created...";
+            Console.WriteLine("Outputting one element of the array that was created...");
             Console.WriteLine(lines[0]);
             Console.ReadLine();             // a placeholder call for waiting for the user to hit enter before continuing
 
             // foreach loop: loops through an array & temporarily places an element value into line
             //
-            Console.WriteLine("A foreach loop to output all of the elements of the array...";
+            Console.WriteLine("A foreach loop to output all of the elements of the array...");
             foreach (string line in lines)
                 Console.WriteLine(line);
             Console.ReadLine();
 
             // for loop which outputs all of the elements of the array
             //
-            Console.WriteLine("A for loop which outputs all of the elements of the array that had been created...";
+            Console.WriteLine("A for loop which outputs all of the elements of the array that had been created...");
             for (int i = 0; i < lines.Capacity; i++)
             {
                 Console.WriteLine(lines[i]);
@@ -69,7 +69,8 @@ namespace GHNotesOnCSharp_001
             //  Logical operators:
             //                          && || !
 
-            // Serializing a json file into a C# class object
+            // DeSerializing a json file's values into a C# class object. 
+            // And, if changes were made to the values of the objects, then serializing it again.
             // We'll need to add Newtonsoft.Json to the list of using namespaces for the next example
             // In the properties window: rightClick the namespace, in this case it is: GHNotesOnCSharp-001
             //      Manage NuGet Packages > Browse > install Newtonsoft.Json
@@ -95,8 +96,10 @@ namespace GHNotesOnCSharp_001
 
 
             // Necessary variable
-            int profileMenu = 0;    // for selecting which account to output from the simpleTestFile.json file
+            int profileMenu = 0;    // for selecting which object of the element of the array to output from the simpleTestFile.json file
 
+            // Let's deserialize:
+            //
             List<string> linesB = File.ReadAllLines(myFileLoc + "simpleTestFile.json").ToList();
             string jsonTemp = linesB[profileMenu];
             PetAccount petAccounts = JsonConvert.DeserializeObject<PetAccount>(jsonTemp);
@@ -104,6 +107,10 @@ namespace GHNotesOnCSharp_001
             Console.WriteLine("Outputting one of the object values from our petAccounts object...");
             Console.WriteLine($"Account: {petAccounts.Account}");
             Console.ReadLine();
+            
+            // Let's serialize:
+            //
+            
         }
     }
 }
