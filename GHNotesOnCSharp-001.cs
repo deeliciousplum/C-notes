@@ -110,7 +110,18 @@ namespace GHNotesOnCSharp_001
             
             // Let's serialize:
             //
-            
+            Console.WriteLine("Changing some of the object values from our petAccounts object...");
+            petAccounts.Account = "myGoat";
+            petAccounts.Character = "kids";
+            petAccounts.Password = "888666";
+
+            // Serialize the object back to a json and save to simpleTestFile.json
+            //
+            string petAccountsTemp = JsonConvert.SerializeObject(petAccounts, Formatting.None);
+            File.WriteAllText(myFileLoc + "simpleTestFile.json", petAccountsTemp);
+
+            Console.WriteLine("The serialized (json formatted) values have now been saved...");
+            Console.ReadLine();            
         }
     }
 }
