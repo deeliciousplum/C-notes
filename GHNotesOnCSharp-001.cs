@@ -157,7 +157,7 @@ namespace GHNotesOnCSharp_001
             Console.WriteLine(LinesTemp);
             Console.ReadLine();
 
-            Console.WriteLine("Now, it will now save a new json file called myTempFile2.json");
+            Console.WriteLine("Now, it will save a new json file called myTempFile2.json");
             File.WriteAllText(myFileLoc + "myTempFile2.json", LinesTemp);
             Console.ReadLine();
 
