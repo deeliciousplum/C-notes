@@ -1,4 +1,4 @@
-/*	My beginner's notes on working with/exploring C$
+/*	My beginner's notes on working with/exploring C#
 		[20201026] exploring accessing as well as reading/writing to a file
 */
 
