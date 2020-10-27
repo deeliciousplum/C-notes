@@ -1,4 +1,4 @@
-/*	My beginner's notes on working with/exploring C#
+/*	My beginner's notes on working with/exploring C$
 		[20201026] exploring accessing as well as reading/writing to a file
 */
 
@@ -8,7 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using Newtonsoft.Json;    // an addon namespace which helps to parse a Json file & to convert its data to a class obj
+using Newtonsoft.Json;      // an addon namespace which helps to parse a Json file & to convert its data to a class obj
+using System.Text.Json;     // using the namespace's Manage NuGet Packages to install this namespace
 
 namespace GHNotesOnCSharp_001
 {
@@ -18,11 +19,20 @@ namespace GHNotesOnCSharp_001
         {
             // creating a var to hold the location of our test files
             //
-            string myFileLoc = @"C:\Users\thede\source\testFiles\";
+            string myFileLoc = @"C:\Users\thede\source\repos\GHNotesOnCSharp-001\GHNotesOnCSharp-001\";
 
             // reads a file, places each line as an array element
             //
-            List<string> lines = File.ReadAllLines(myFileLoc + "simpleTestFile.txt").ToList();
+
+            // Before I forget, do make a json file called: myTempFile.json
+            /* Now, place these three lines into it:
+              
+                    {"Account":"myKitchen","Character":"stove","Password":"111111"}
+                    {"Account":"myCat","Character":"kittens","Password":"888666"}
+                    {"Account":"myFrog","Character":"poliwogs","Password":"555555"}
+            */
+
+            List<string> lines = File.ReadAllLines(myFileLoc + "myTempFile.json").ToList();
 
 
             // output the number of elements in the lines array
@@ -51,7 +61,13 @@ namespace GHNotesOnCSharp_001
                 Console.WriteLine(lines[i]);
             }
             Console.ReadLine();
+
+
+            // ** Works up to here! **
+            Console.WriteLine("/n/n** THE CODE WORKS THIS FAR! **");
+            Console.ReadLine();
             Console.Clear(); // clears the Console screen
+
 
             // --------------------------------------------------------
             //  Arithmetic operators:
@@ -69,8 +85,7 @@ namespace GHNotesOnCSharp_001
             //  Logical operators:
             //                          && || !
 
-            // DeSerializing a json file's values into a C# class object. 
-            // And, if changes were made to the values of the objects, then serializing it again.
+            // Serializing the json file's values into a C# class object
             // We'll need to add Newtonsoft.Json to the list of using namespaces for the next example
             // In the properties window: rightClick the namespace, in this case it is: GHNotesOnCSharp-001
             //      Manage NuGet Packages > Browse > install Newtonsoft.Json
@@ -96,32 +111,56 @@ namespace GHNotesOnCSharp_001
 
 
             // Necessary variable
-            int profileMenu = 0;    // for selecting which object of the element of the array to output from the simpleTestFile.json file
+            int profileMenu = 1;    // for selecting which object of the element of the array to output from the simpleTestFile.json file
 
             // Let's deserialize:
+            // **Note**: the following will work for a single line of a json file
             //
-            List<string> linesB = File.ReadAllLines(myFileLoc + "simpleTestFile.json").ToList();
-            string jsonTemp = linesB[profileMenu];
+            //List<string> linesB = File.ReadAllLines(myFileLoc + "myTempFile.json").ToList();
+            string jsonTemp = lines[profileMenu];
             PetAccount petAccounts = JsonConvert.DeserializeObject<PetAccount>(jsonTemp);
 
             Console.WriteLine("Outputting one of the object values from our petAccounts object...");
             Console.WriteLine($"Account: {petAccounts.Account}");
             Console.ReadLine();
-            
-            // Let's serialize:
-            //
+
+            // Let's serialize.
+            // First, we'll change the values of one of the ojects:
             Console.WriteLine("Changing some of the object values from our petAccounts object...");
             petAccounts.Account = "myGoat";
             petAccounts.Character = "kids";
             petAccounts.Password = "888666";
-		
-            // Serialize the object back to a json and save to simpleTestFile.json
-            //
-            string petAccountsTemp = JsonConvert.SerializeObject(petAccounts, Formatting.None);
-            File.WriteAllText(myFileLoc + "simpleTestFile.json", JsonConvert.SerializeObject(petAccountsTemp));
 
-            Console.WriteLine("The serialized (json formatted) values have now been saved...");
-            Console.ReadLine();            
+            // Since we changed an object's values, we now need to serialize the object
+
+            string petAccountsTemp = JsonConvert.SerializeObject(petAccounts, Formatting.None);
+            Console.WriteLine(petAccountsTemp);
+            Console.ReadLine();
+
+            lines[profileMenu] = petAccountsTemp;
+
+            Console.WriteLine("A foreach loop to output each of the elements of the altered array...");
+            foreach (string line in lines)
+                Console.WriteLine(line);
+            Console.ReadLine();
+
+            // Now, and to save the newly altered and serialzed json lines we need to merge them...
+            //
+
+            string LinesTemp = lines[0];    // this initiates the temp var for the numerous json lines
+
+            for (int i = 1; i < lines.Capacity; i++)
+            {
+                LinesTemp += ("\n" + lines[i]);
+            }
+            Console.WriteLine("Now, we'll see the json lines all stacked one on top of the other...");
+            Console.WriteLine(LinesTemp);
+            Console.ReadLine();
+
+            Console.WriteLine("Now, it will now save a new json file called myTempFile2.json");
+            File.WriteAllText(myFileLoc + "myTempFile2.json", LinesTemp);
+            Console.ReadLine();
+
         }
     }
 }
