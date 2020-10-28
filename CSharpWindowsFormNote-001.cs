@@ -5,7 +5,7 @@
         checkBox1.Checked = false;    //for (un)checking a checkBox
     
 //    textBox -
-      textBox1.Text = "";             // for clearing a textBox
+        textBox1.Text = "";             // for clearing a textBox
       
 
 // Method call examples
