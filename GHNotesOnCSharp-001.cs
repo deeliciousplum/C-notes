@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;      // an addon namespace which helps to parse a Json file & to convert its data to a class obj
 using System.Text.Json;     // using the namespace's Manage NuGet Packages to install this namespace
+using IniParser;            // https://github.com/rickyah/ini-parser | https://www.nuget.org/packages/ini-parser/ | https://github.com/rickyah/ini-parser/wiki
+using IniParser.Model;
 
 namespace GHNotesOnCSharp_001
 {
@@ -160,6 +162,27 @@ namespace GHNotesOnCSharp_001
             Console.WriteLine("Now, it will save a new json file called myTempFile2.json");
             File.WriteAllText(myFileLoc + "myTempFile2.json", LinesTemp);
             Console.ReadLine();
+
+		
+            //  Working with ini files using ini-
+            //
+
+            // using an example ini:
+            /*  myTestIni.ini:
+                    [settings]
+                    UserProfileEnabled=true
+                    ExitOnCompletion=true
+
+            */
+            var parser = new FileIniDataParser();
+            IniData data = parser.ReadFile("myTestIni.ini");
+
+            // string UserProfileEnabled = data["settings"]["UserProfileEnabled"];
+            // UseProfileScript contains "true"
+            // bool UseProfileEnbld = bool.Parse(UserProfileEnabled);
+
+            data["settings"]["UserProfileEnabled"] = "false";
+            parser.WriteFile("myTestIni.ini", data);
 
         }
     }
