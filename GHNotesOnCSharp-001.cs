@@ -164,7 +164,7 @@ namespace GHNotesOnCSharp_001
             Console.ReadLine();
 
 		
-            //  Working with ini files using ini-
+            //  Working with ini files using ini-parser
             //
 
             // using an example ini:
