@@ -12,6 +12,7 @@ using Newtonsoft.Json;      // an addon namespace which helps to parse a Json fi
 using System.Text.Json;     // using the namespace's Manage NuGet Packages to install this namespace
 using IniParser;            // https://github.com/rickyah/ini-parser | https://www.nuget.org/packages/ini-parser/ | https://github.com/rickyah/ini-parser/wiki
 using IniParser.Model;
+using System.Diagnostics;   // necessary for 'Process.Start(@"C\Windows\notepad.exe');' as well as 'Process.GetProcessesByName("notepad");
 
 namespace GHNotesOnCSharp_001
 {
@@ -184,6 +185,20 @@ namespace GHNotesOnCSharp_001
             data["settings"]["UserProfileEnabled"] = "false";
             parser.WriteFile("myTestIni.ini", data);
 
+            // using System.Diagnostics;
+            // examples of starting and stopping apps/processes
+		
+            readonly string appLoc = @"C:\Windows\notepad.exe";
+            readonly string procName = "notepad";
+            
+            Process.Start(appLoc); 					// starts the referenced app/process
+
+            Process[] notepads = Process.GetProcessesByName(procName);	// gathers in an array all of the process ids of all processes named "notepad"
+
+            foreach (var process in notepads)				// stops every process which was associated with "notepad"
+            {
+                process.Kill();
+            }
         }
     }
 }
