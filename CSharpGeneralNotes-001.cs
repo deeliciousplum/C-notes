@@ -12,6 +12,11 @@
 //
         textBox1.Text = "";             // for clearing a textBox
       
+// copying renaming files
+//
+        string myProfileOrigLoc = @"C:\origFolder\";
+        string myProfileEditsLoc = @"C:\testFolder\";
+        File.Copy(myProfileOrigLoc + "origFile.js", myProfileEditsLoc + "testFile.js"); // using System.IO;
 
 // Method call examples
 //
