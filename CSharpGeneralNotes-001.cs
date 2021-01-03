@@ -5,7 +5,8 @@
 // ToolBox Common Controls:
 // checkBox
 //
-        checkBox1.Checked = false;    //for (un)checking a checkBox
+        checkBox1.Checked = false;                      // for (un)checking a checkBox
+        string.IsNullOrWhiteSpace(TextBox1.Text)        // conditional check if a TextBox is left blank or with with solely spacebar chars
     
 // textBox
 //
