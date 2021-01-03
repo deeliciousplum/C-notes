@@ -1,5 +1,7 @@
 // Exploring the Windows Form for designing a GUI/UI
 
+// quick copying of ToolBox items: select the items on the design form, hold down the ctrl btn, and drag. Copies are made of the items selected.
+
 // ToolBox Common Controls:
 // checkBox
 //
