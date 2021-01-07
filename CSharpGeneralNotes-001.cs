@@ -65,3 +65,20 @@
                 foreach (string line in lines)
                         LB_myTestLB.Items.Add(line);
         }
+
+// working with aarays
+// removing an element of an array using .Where()
+//
+        int[] array = { 1, 3, 4, 5, 4, 2 };
+        int item = 4;
+ 
+        array = array.Where(e => e != item).ToArray();
+        Console.WriteLine(String.Join(",", array));             // outputs: 1, 3, 5, 2 - removed all element instances of '4'
+
+// removing an element of an array using .FindAll()
+//        
+        int[] array = { 1, 3, 4, 5, 4, 2 };
+        int item = 4;
+ 
+        array = Array.FindAll(array, i => i != item).ToArray();
+        Console.WriteLine(String.Join(",", array));            // outputs: 1, 3, 5, 2 - removed all element instances of '4'
