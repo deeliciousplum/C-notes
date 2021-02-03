@@ -100,7 +100,7 @@
 // reading in a file while storing each line in a specified array
 //
         if (File.Exists(@"C:\tmp\testFile.txt"))
-                string[] lines = File.ReadAllLines(@"C:\tmp\testFile.txt"));
+                string[] lines = File.ReadAllLines(@"C:\tmp\testFile.txt");
 
                 foreach (string line in lines)
                         LB_myTestLB.Items.Add(line);
