@@ -18,6 +18,46 @@
         string myProfileEditsLoc = @"C:\testFolder\";
         File.Copy(myProfileOrigLoc + "origFile.js", myProfileEditsLoc + "testFile.js"); // using System.IO;
 
+// replacing a file
+//
+        string FileToMoveAndDelete = @"C:\origFolder\thisFile.txt";
+        string FileToReplace = @"C:\origFolder\thatFile.txt";
+        string BackupOfFileToReplace = @"C:\origFolder\thatFile.txt-bak";
+        File.Replace(FileToMoveAndDelete, FileToReplace, BackupOfFileToReplace, false);
+
+// deleting a dir
+//
+        System.IO.Directory.Delete(@"C:\deleteMe", true)
+                
+        or
+        
+        System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(@"C:\deleteMe");
+        di.Delete(true);
+
+// copying a dir and its subfolder(s) then saving that to a new location 
+//
+     public static void Main() {
+         string sourceDir = @"d:\thisDir";
+         string targetDir = @"e:\thatDir";
+         DirectoryInfo srcDir = new DirectoryInfo(sourceDir);
+         DirectoryInfo trgtDir = new DirectoryInfo(targetDir);
+         CopyAll(srcDir, trgtDir);
+         
+         Console.ReadLine();
+      }
+      public static void CopyAll(DirectoryInfo source, DirectoryInfo target) {
+         Directory.CreateDirectory(target.FullName);
+         foreach (FileInfo fi in source.GetFiles()) {
+            fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+         }
+         foreach (DirectoryInfo diSourceSubDir in source.GetDirectories()) {
+            DirectoryInfo nextTargetSubDir =
+            target.CreateSubdirectory(diSourceSubDir.Name);
+            CopyAll(diSourceSubDir, nextTargetSubDir);
+         }
+      }
+
+
 // Method call examples
 //
         ClearChkTextBoxes();                // for calling the method
