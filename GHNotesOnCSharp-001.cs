@@ -204,6 +204,16 @@ namespace GHNotesOnCSharp_001
 	    //
             ProcessStartInfo start = new ProcessStartInfo("cmd.exe", "/k ipconfig");
             Process.Start(start);
+		
+            // another example of using C# and cmd.exe
+		
+            // the following opens a cmd window, changes dir, uses & for executing another command (in this case, it runs an "app" which utilizes the url in someURL),
+	    // then ends without closing the cmd window
+	    //
+            private const string V = "/k cd /d g:\\dl";
+            string someURL = @"https://www.someURL.com";
+            Process.Start("cmd.exe", "/k cd /d g:\\dl &app " + someURL);
+		
         }
     }
 }
