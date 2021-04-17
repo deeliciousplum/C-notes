@@ -199,6 +199,11 @@ namespace GHNotesOnCSharp_001
             {
                 process.Kill();
             }
+		
+	    // the following opens a cmd window, executes ipconfig, then ends without closing the cmd window
+	    //
+            ProcessStartInfo start = new ProcessStartInfo("cmd.exe", "/k ipconfig");
+            Process.Start(start);
         }
     }
 }
