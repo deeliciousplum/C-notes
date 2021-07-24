@@ -122,3 +122,19 @@
  
         array = Array.FindAll(array, i => i != item).ToArray();
         Console.WriteLine(String.Join(",", array));            // outputs: 1, 3, 5, 2 - removed all element instances of '4'
+
+// when deleting a file, how to send it to the recycle bin
+//
+
+// In the Solution Explorer panel, add to the References tree Microsoft.VisualBasic (right click on References add that)
+
+        using Microsoft.VisualBasic.FileIO;
+
+        if (File.Exists(testConfigDir + delCharProfileName + ".js"))
+        {
+                FileSystem.DeleteFile(
+                        "testFileToBeDeleted.js",
+                        UIOption.AllDialogs,
+                        RecycleOption.SendToRecycleBin
+                );
+        }
