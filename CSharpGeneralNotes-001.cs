@@ -138,3 +138,38 @@
                         RecycleOption.SendToRecycleBin
                 );
         }
+
+// working with a file...
+//      - reading file into an array
+//      - alter the last element of the array to be an empty line: ""
+//      - removing the first array element
+//      - concatinating the two arrays
+//      - saving the new concatinated array
+
+// reading a file into an array
+//
+        string mainDir = @"Z:\main\";
+        string tempDir = @"Z:\temp\";
+        
+        // check if file exists, if so and while reading file, allocate each line as an element in an array
+        //
+        if (File.Exists(mainDir + "cars.txt") && File.Exists(mainDir + "carSpecs.txt"))
+        {
+                string[] linesCars = File.ReadAllLines(mainDir + "cars.txt"));
+                string[] linesCarSpecs = File.ReadAllLines(mainDir + "carSpecs.txt"));
+                
+                // alter the last line of the array to be an empty line: ""
+                linesCars[linesCars.Length - 1] = "";
+                
+                // remove the first element of the second array in preparation to concatinate the two arrays
+                linesCarSpecs = linesCarSpecs.Skip(1).ToArray();
+                
+                // concatinate the two files
+                //      - increase the size of the main array so that it fits the number of elements which will be concatinated to it
+                Array.Resize(ref linesCars, linesCars.Length + linesCarSpecs.Length);
+                //      - concatinate all of the elements from the second array into the first array
+                Array.Copy(linesCarSpecs, 0, linesCars, linesCars.Length - linesCarSpecs.Length, linesCarSpecs.Length);
+                
+                // write all of the elements of the altered main array into a text new file which is saved into a temp folder
+                File.WriteAllLines(tempDir + "Cars.txt", linesCars, Encoding.UTF8);
+        }
