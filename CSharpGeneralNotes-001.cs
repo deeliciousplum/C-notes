@@ -171,5 +171,5 @@
                 Array.Copy(linesCarSpecs, 0, linesCars, linesCars.Length - linesCarSpecs.Length, linesCarSpecs.Length);
                 
                 // write all of the elements of the altered main array into a text new file which is saved into a temp folder
-                File.WriteAllLines(tempDir + "Cars.txt", linesCars, Encoding.UTF8);
+                File.WriteAllLines(tempDir + "cars.txt", linesCars, Encoding.UTF8);
         }
