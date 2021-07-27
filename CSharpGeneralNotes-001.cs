@@ -173,3 +173,14 @@
                 // write all of the elements of the altered main array into a text new file which is saved into a temp folder
                 File.WriteAllLines(tempDir + "cars.txt", linesCars, Encoding.UTF8);
         }
+
+// a few notes on outputting a directory or file or file extension in a textbox
+
+        string dirAndFile       = @"Z:\main\temp.txt";
+        string justTheFileName  = Path.GetFileNameWithoutExtension(dirAndFile); // temp
+        string justTheFileNameWithExtension = Path.GetFileName(dirAndFile);     // temp.txt
+        string justTheExtension = Path.GetExtension(dirAndFile);                // .txt
+        string justThefolderItsIn = Path.GetDirectoryName(dirAndFile);          // Z:\main
+
+        String dirAndFile=@"C:\Program Files\Test.txt";
+        TextBoxTest.Text = Path.GetFileName(dirAndFile);
