@@ -184,3 +184,29 @@
 
         String dirAndFile=@"C:\Program Files\Test.txt";
         TextBoxTest.Text = Path.GetFileName(dirAndFile);
+
+//
+// notes on starting and killing a process
+
+using System.Diagnostics;               // necessary for opening an exe file
+using System.Runtime.InteropServices;   // necessary for acquiring handle, window id, and other useful thingies
+
+        private int currentAppId;
+
+        //
+        // start the exe
+        Process appLaunch = Process.Start(@"C:\myApp.exe");
+        currentAppId = appLaunch.Id;
+        
+        //
+        // to kill the exe
+        Process[] process = Process.GetProcess();
+        foreach (Process prs in process)
+        {
+                if (prs.Id == currentAppId)
+                {
+                        prs.Kill;
+                        break;
+                }
+        }
+        
