@@ -2,6 +2,7 @@
     1. deleting folders to trashbin
     2. copy folder(s), move copied folder(s) to a new destination - using System.IO
     3. copy file, replace target file w/ copy - using System.IO
+    4. write an array to a file - using System.IO
 */
 
 
@@ -78,4 +79,17 @@ public void ReplaceFile (string _sourceFile, string _targetfile)
     *           with the copied file if file already exists
     */
     File.Copy(_sourceFile, _targetfile, true);
+}
+
+/*  3. *************************************
+    *
+    * write an array to a file
+    *
+    ****************************************
+*/
+public void WriteArrayToFile(string _targetFile, string[] arrayToWrite)
+{
+    // using.System.IO
+    
+    File.WriteAllLines(_targetFile, arrayToWrite);
 }
