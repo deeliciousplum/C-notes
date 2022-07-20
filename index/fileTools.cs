@@ -1,5 +1,6 @@
 /* C# index...
     1. deleting folders to trashbin
+    2. copy folder(s), move copied folder(s) to a new destination - using System.IO
 */
 
 
@@ -30,4 +31,34 @@ public void DeleteFolder(string _dirName)
     Microsoft.VisualBasic.FileIO.FileSystem.DeleteDirectory(_dirName,
         Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs,
         Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
+}
+
+/*  2. *******************************(*************************
+    *
+    * copy folder(s), move copied folder(s) to a new destination
+    *
+    ************************************************************
+*/
+public void CopyFolderMoveToDest(string _sourceFolder, string _targetPath)
+{
+    // using.System.IO
+    
+    // create the dir where the files and folders will be copied to 
+    Directory.CreateDirectory(_targetPath);
+
+    // first:   copy all the files and folders located at the _sourceFolder location
+    // next:    at the _targetPath location, create all of the directories that were in the _sourceFoldee location
+    // 
+    foreach (string dirPath in Directory.GetDirectories(_sourceFolder, "*", SearchOption.AllDirectories))
+    {
+        Directory.CreateDirectory(dirPath.Replace(_sourceFolder, _targetPath));
+    }
+
+    // copy all the files located at the _sourceFolder location
+    // place the copied files at the _targetPath location 
+    // !!!important note: if a target dir has the same file name, it will be replaced by the copied file
+    foreach (string newPath in Directory.GetFiles(_sourceFolder, "*.*", SearchOption.AllDirectories))
+    {
+        File.Copy(newPath, newPath.Replace(_sourceFolder, _targetPath), true);
+    }
 }
